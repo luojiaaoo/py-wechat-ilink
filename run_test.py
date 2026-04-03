@@ -35,6 +35,9 @@ def main() -> int:
     print(f"Logged in as: {account.account_id}")
     print("Echo bot is running. Press Ctrl+C to stop.")
 
+    last_message_chat_id = list(client._context_map.keys())[-1]
+    print(f"Last message chat ID: {last_message_chat_id}")
+    client.send_text(last_message_chat_id, "欢迎使用微信机器人！")
     try:
         while True:
             messages = client.receive_messages()

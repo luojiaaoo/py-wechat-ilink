@@ -19,45 +19,13 @@ pip install py-wechat-ilink
 
 ## 依赖
 
-- Python >= 3.10
+- Python >= 3.9
 - pycryptodome >= 3.19.0
 
 ## 快速开始
 
-```python
-from py_wechat_ilink import WeChatClient
-
-# 创建客户端并指定缓存目录
-client = WeChatClient(cache_dir=".cache")
-
-# 尝试加载已缓存的凭证（跳过登录流程）
-account = client.load_credentials()
-if account:
-    print(f"已加载缓存账号: {account.account_id}")
-else:
-    # 获取二维码并保存凭证
-    qrcode_url = client.get_qrcode_and_save_credentials()
-    print(f"请扫描二维码: {qrcode_url}")
-
-    # 等待用户扫码确认
-    account = client.wait_for_credentials()
-    print(f"登录成功: {account.account_id}")
-
-# 发送文本消息
-client.send_text(to_user="user_id_here", text="来自 Python 的问候！")
-
-# 发送图片
-client.send_image(to_user="user_id_here", file_path="path/to/image.jpg")
-
-# 接收消息（长轮询）
-while True:
-    messages = client.receive_messages(timeout=30)
-    for msg in messages:
-        print(f"来自: {msg.sender_id}, 内容: {msg.text}")
-
-        # 下载消息中的媒体文件
-        if msg.media_path is None and msg.message_type != "text":
-            client.download_media(msg)
+```bash
+python run_test.py
 ```
 
 ## API 参考
